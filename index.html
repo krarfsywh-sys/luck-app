@@ -11,7 +11,7 @@
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   body {
     margin: 0; font-family: 'Segoe UI', Tahoma, sans-serif;
-    background: #0a0e1a;
+    background: #05070d;
     color: #fff; min-height: 100vh; padding: 12px; padding-bottom: 40px;
   }
   .container { max-width: 600px; margin: 0 auto; }
@@ -19,12 +19,12 @@
   h1 { font-size: 22px; margin: 6px 0; color: #4da3ff; }
   .sub { color: #888; font-size: 12px; }
   .card {
-    background: rgba(255,255,255,0.05); border-radius: 14px;
+    background: rgba(255,255,255,0.04); border-radius: 14px;
     padding: 14px; margin-bottom: 12px;
     border: 1px solid rgba(77,163,255,0.15);
   }
-  .card h2 { font-size: 15px; margin: 0 0 6px; color: #4da3ff; display: flex; align-items: center; justify-content: space-between; }
-  .card .hint { font-size: 11px; color: #888; margin-bottom: 10px; line-height: 1.5; }
+  .card h2 { font-size: 15px; margin: 0 0 8px; color: #4da3ff; display: flex; align-items: center; justify-content: space-between; }
+  .card .hint { font-size: 11px; color: #888; margin-bottom: 10px; }
   select, input {
     width: 100%; padding: 10px; border-radius: 10px;
     border: 1px solid #333; background: #0f1420; color: #fff;
@@ -36,7 +36,6 @@
     color: #fff; font-size: 15px; font-weight: bold;
     cursor: pointer; font-family: inherit;
   }
-  button:active { transform: scale(0.98); }
   #installBtn {
     width: 100%;
     background: linear-gradient(90deg, #0066ff, #00c6ff);
@@ -44,126 +43,209 @@
     box-shadow: 0 4px 15px rgba(0,102,255,0.4);
   }
 
-  /* ===== بطاقات الباكات (مثل eFootball) ===== */
+  /* ========== بطاقات الباكات مثل eFootball ========== */
   .packs-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 10px;
+    gap: 12px;
     margin-bottom: 12px;
   }
   .pack-card {
     position: relative;
-    border-radius: 12px;
-    padding: 14px 10px 12px;
+    border-radius: 14px;
     overflow: hidden;
     cursor: pointer;
-    border: 1px solid rgba(255,255,255,0.15);
+    border: 2px solid #333;
     transition: transform 0.15s;
-    min-height: 130px;
-    display: flex; flex-direction: column; justify-content: space-between;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
   }
   .pack-card:active { transform: scale(0.97); }
 
-  /* أنواع الباكات بألوان مختلفة */
-  .pack-epic {
-    background: linear-gradient(135deg, #1a3a2e 0%, #0d4a3f 50%, #0a2a3a 100%);
-    border-color: #00e5a0;
-  }
-  .pack-bigtime {
-    background: linear-gradient(135deg, #3a1a2e 0%, #4a0d3f 50%, #2a0a3a 100%);
-    border-color: #d946ef;
-  }
-  .pack-showtime {
-    background: linear-gradient(135deg, #2a1a3a 0%, #3a2a5a 50%, #1a0a3a 100%);
-    border-color: #8b5cf6;
-  }
-  .pack-potw {
-    background: linear-gradient(135deg, #3a2a0a 0%, #4a3a0d 50%, #2a1a0a 100%);
-    border-color: #f59e0b;
-  }
-  .pack-standard {
-    background: linear-gradient(135deg, #1a2a3a 0%, #0d3a4a 50%, #0a1a2a 100%);
-    border-color: #06b6d4;
-  }
-  .pack-legendary {
-    background: linear-gradient(135deg, #4a2a0a 0%, #5a3a0d 50%, #2a1a0a 100%);
-    border-color: #fbbf24;
-  }
-  .pack-default {
-    background: linear-gradient(135deg, #1e2530 0%, #2a3545 50%, #151b25 100%);
-    border-color: #4da3ff;
-  }
-
-  /* شعار الباك */
-  .pack-shine {
-    position: absolute;
-    top: -30%; right: -30%;
-    width: 60%; height: 60%;
-    background: radial-gradient(circle, rgba(255,255,255,0.25), transparent 70%);
-    border-radius: 50%;
-    pointer-events: none;
-  }
-
-  .pack-name {
+  /* صورة الباك (غلاف) */
+  .pack-cover {
     position: relative;
+    width: 100%;
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+  }
+
+  /* خلفيات بألوان eFootball */
+  .cover-epic {
+    background: linear-gradient(160deg, #003a2e 0%, #005c4a 30%, #0a7d5f 60%, #003a2e 100%);
+  }
+  .cover-epic::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at 30% 20%, rgba(0,229,160,0.5) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(0,255,200,0.3) 0%, transparent 50%);
+  }
+  .cover-bigtime {
+    background: linear-gradient(160deg, #4a0033 0%, #6b0050 30%, #8a1068 60%, #4a0033 100%);
+  }
+  .cover-bigtime::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at 30% 20%, rgba(217,70,239,0.5) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(255,100,220,0.3) 0%, transparent 50%);
+  }
+  .cover-showtime {
+    background: linear-gradient(160deg, #2a0050 0%, #40006b 30%, #55008a 60%, #2a0050 100%);
+  }
+  .cover-showtime::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at 30% 20%, rgba(139,92,246,0.5) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(180,120,255,0.3) 0%, transparent 50%);
+  }
+  .cover-potw {
+    background: linear-gradient(160deg, #4a2800 0%, #6b3a00 30%, #8a4a00 60%, #4a2800 100%);
+  }
+  .cover-potw::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at 30% 20%, rgba(245,158,11,0.5) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(255,180,50,0.3) 0%, transparent 50%);
+  }
+  .cover-standard {
+    background: linear-gradient(160deg, #001a3a 0%, #002b5c 30%, #003a7d 60%, #001a3a 100%);
+  }
+  .cover-standard::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at 30% 20%, rgba(6,182,212,0.5) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(77,163,255,0.3) 0%, transparent 50%);
+  }
+  .cover-legendary {
+    background: linear-gradient(160deg, #3a2000 0%, #6b3d00 30%, #8a5000 60%, #3a2000 100%);
+  }
+  .cover-legendary::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at 30% 20%, rgba(251,191,36,0.6) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(255,215,100,0.4) 0%, transparent 50%);
+  }
+  .cover-default {
+    background: linear-gradient(160deg, #151b25 0%, #1e2530 30%, #2a3545 60%, #151b25 100%);
+  }
+
+  /* شعار النوع (أعلى الباك) */
+  .pack-type-label {
+    position: relative;
+    z-index: 2;
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,0.9);
+    text-transform: uppercase;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.9);
+    background: rgba(0,0,0,0.4);
+    padding: 3px 8px;
+    border-radius: 20px;
+    align-self: flex-start;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+
+  /* أيقونة الوسط */
+  .pack-icon {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -55%);
+    font-size: 62px;
+    z-index: 1;
+    filter: drop-shadow(0 6px 20px rgba(0,0,0,0.8));
+    opacity: 0.95;
+  }
+
+  /* أشعة ضوئية */
+  .pack-rays {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 140%; height: 140%;
+    z-index: 0;
+    background: conic-gradient(from 0deg, transparent 0deg, rgba(255,255,255,0.15) 20deg, transparent 40deg, transparent 90deg, rgba(255,255,255,0.1) 110deg, transparent 130deg, transparent 200deg, rgba(255,255,255,0.15) 220deg, transparent 240deg);
+    animation: rotateRays 20s linear infinite;
+    opacity: 0.6;
+  }
+  @keyframes rotateRays {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+
+  /* معلومات الباك أسفل الغلاف */
+  .pack-info {
+    position: relative;
+    z-index: 2;
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(6px);
+    border-radius: 10px;
+    padding: 8px;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .pack-info .name {
     font-size: 12px;
     font-weight: bold;
+    line-height: 1.2;
+    margin-bottom: 4px;
     color: #fff;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.7);
-    line-height: 1.3;
-    margin-bottom: 6px;
-    z-index: 1;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+    height: 30px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
   }
-  .pack-luck {
-    position: relative;
-    z-index: 1;
+  .pack-info .luck-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
-  .pack-luck-num {
-    font-size: 26px;
-    font-weight: bold;
+  .pack-info .luck-num {
+    font-size: 20px;
+    font-weight: 900;
     line-height: 1;
-    color: #fff;
-    text-shadow: 0 2px 6px rgba(0,0,0,0.6);
   }
-  .pack-luck-num.good { color: #00e5a0; }
-  .pack-luck-num.mid { color: #ffcc00; }
-  .pack-luck-num.bad { color: #ff5555; }
-  .pack-luck-lbl {
+  .pack-info .luck-num.good { color: #00e5a0; }
+  .pack-info .luck-num.mid { color: #ffcc00; }
+  .pack-info .luck-num.bad { color: #ff5555; }
+  .pack-info .luck-lbl {
     font-size: 9px;
     color: rgba(255,255,255,0.7);
-    margin-top: 2px;
   }
-  .pack-meta {
-    position: relative;
-    z-index: 1;
+  .pack-info .opens-count {
     font-size: 9px;
     color: rgba(255,255,255,0.6);
-    margin-top: 6px;
-    display: flex; justify-content: space-between;
+    text-align: left;
   }
-  .pack-badge {
-    position: absolute;
-    top: 8px; left: 8px;
-    background: rgba(0,0,0,0.5);
-    padding: 2px 6px;
-    border-radius: 6px;
+  .pack-info .best-rating {
     font-size: 9px;
+    color: #ffcc00;
     font-weight: bold;
-    color: #4da3ff;
-    z-index: 2;
   }
 
-  /* ===== مودال تسجيل السحبة ===== */
+  /* شارة الزاوية */
+  .pack-corner {
+    position: absolute;
+    top: 8px; right: 8px;
+    background: rgba(0,0,0,0.6);
+    color: #fff;
+    font-size: 9px;
+    padding: 3px 7px;
+    border-radius: 8px;
+    font-weight: bold;
+    z-index: 3;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+
+  /* ========== المودال ========== */
   .modal-overlay {
-    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0,0,0,0.85);
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.9);
     display: none; align-items: center; justify-content: center;
     z-index: 100; padding: 16px;
     backdrop-filter: blur(4px);
   }
   .modal-overlay.show { display: flex; }
   .modal {
-    background: linear-gradient(135deg, #151b25, #1e2530);
+    background: linear-gradient(135deg, #0f1420, #1a2330);
     border-radius: 16px;
     padding: 20px;
     max-width: 400px;
@@ -198,7 +280,7 @@
   .modal-actions button { flex: 1; }
   .btn-cancel { background: #333; }
 
-  /* ===== باقي الأقسام ===== */
+  /* ========== الأقسام العامة ========== */
   .big-luck {
     text-align: center; padding: 14px 0;
     background: radial-gradient(circle, rgba(77,163,255,0.15), transparent);
@@ -234,13 +316,6 @@
   .r-108 { background: #ec4899; }
   .r-109 { background: #a855f7; }
 
-  .help-box {
-    background: rgba(255,204,0,0.08); border: 1px solid rgba(255,204,0,0.25);
-    padding: 10px; border-radius: 10px; font-size: 11px; color: #ffcc00;
-    line-height: 1.6;
-  }
-  .help-box b { color: #fff; }
-
   .pack-manage-row { display: flex; gap: 6px; margin-bottom: 8px; }
   .pack-manage-row input { margin-bottom: 0; flex: 1; }
   .pack-manage-row button { width: auto; padding: 10px 14px; font-size: 13px; }
@@ -266,7 +341,6 @@
 
   <button id="installBtn">📲 تثبيت التطبيق</button>
 
-  <!-- نسبة الحظ العامة -->
   <div class="card">
     <h2>🔥 نسبة حظك العامة</h2>
     <div class="big-luck">
@@ -276,13 +350,11 @@
     </div>
   </div>
 
-  <!-- بطاقات الباكات -->
   <div class="card">
-    <h2>🎁 الباكات المتاحة <span style="font-size:10px;color:#888;">(اضغط لتسجيل سحبة)</span></h2>
+    <h2>🎁 الباكات <span style="font-size:10px;color:#888;">(اضغط لتسجيل سحبة)</span></h2>
     <div class="packs-grid" id="packsGrid"></div>
   </div>
 
-  <!-- ملخص -->
   <div class="card">
     <h2>📊 ملخص عام</h2>
     <div class="stat-grid">
@@ -293,11 +365,10 @@
     </div>
   </div>
 
-  <!-- إدارة الباكات -->
   <div class="card">
     <h2>➕ إدارة الباكات <button class="toggle-btn" id="toggleManage">عرض/إخفاء</button></h2>
     <div id="manageSection" style="display:none;">
-      <div class="hint">ضيف باك جديد إذا نزلت باكات بـ eFootball</div>
+      <div class="hint" style="font-size:11px;color:#888;margin-bottom:8px;">ضيف باك جديد إذا نزلت باكات بـ eFootball</div>
       <div class="pack-manage-row">
         <input type="text" id="newPackName" placeholder="اسم الباك الجديد..." maxlength="50">
         <button class="green-btn" id="addPackBtn">إضافة</button>
@@ -306,19 +377,16 @@
     </div>
   </div>
 
-  <!-- السجل -->
   <div class="card">
     <h2>🕐 سجل السحبات</h2>
     <ul id="history"><li style="color:#666;">ماكو سحبات مسجلة بعد.</li></ul>
   </div>
 
-  <!-- مسح -->
   <div class="card">
     <button class="red-btn" id="clearBtn">🗑️ مسح كل السجل</button>
   </div>
 </div>
 
-<!-- مودال تسجيل السحبة -->
 <div class="modal-overlay" id="modal">
   <div class="modal">
     <h3 id="modalPackName">اسم الباك</h3>
@@ -346,29 +414,22 @@
 const STORAGE_KEY = 'efootball_luck_data';
 const PACKS_KEY = 'efootball_packs';
 
+// كل باك: { name, type, icon }
 const DEFAULT_PACKS = [
-  "Epic",
-  "Big Time",
-  "Show Time",
-  "Big Time & Epic",
-  "POTW",
-  "Highlight",
-  "Featured",
-  "Standard",
-  "Legendary",
-  "Mythical",
-  "Club Selection",
-  "National Team Selection",
-  "Box Draw 100",
-  "Box Draw 40",
-  "Box Draw 10",
-  "Single Draw",
-  "10x Draw",
-  "Free Draw",
-  "Special Pack",
-  "League Pack",
-  "Match Pass Rewards",
-  "Other"
+  { name: "Epic", type: "Epic", icon: "💎" },
+  { name: "Big Time", type: "Big Time", icon: "⚡" },
+  { name: "Show Time", type: "Show Time", icon: "🌟" },
+  { name: "POTW", type: "POTW", icon: "🏅" },
+  { name: "Highlight", type: "Highlight", icon: "✨" },
+  { name: "Featured", type: "Featured", icon: "⭐" },
+  { name: "Standard", type: "Standard", icon: "📦" },
+  { name: "Legendary", type: "Legendary", icon: "👑" },
+  { name: "Box Draw 100", type: "Box Draw", icon: "🎁" },
+  { name: "Box Draw 40", type: "Box Draw", icon: "🎁" },
+  { name: "Single Draw", type: "Single", icon: "🎲" },
+  { name: "10x Draw", type: "10x", icon: "🎯" },
+  { name: "Free Draw", type: "Free", icon: "🎉" },
+  { name: "Match Pass", type: "Match Pass", icon: "🏆" }
 ];
 
 let data = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{"opens":[]}');
@@ -377,19 +438,17 @@ let packs = JSON.parse(localStorage.getItem(PACKS_KEY) || 'null') || [...DEFAULT
 function saveData() { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); }
 function savePacks() { localStorage.setItem(PACKS_KEY, JSON.stringify(packs)); }
 
-// اختيار كلاس الباك حسب اسمه
-function getPackClass(name) {
-  const n = name.toLowerCase();
-  if (n.includes('epic')) return 'pack-epic';
-  if (n.includes('big time')) return 'pack-bigtime';
-  if (n.includes('show time')) return 'pack-showtime';
-  if (n.includes('potw') || n.includes('highlight') || n.includes('featured')) return 'pack-potw';
-  if (n.includes('legendary') || n.includes('mythical')) return 'pack-legendary';
-  if (n.includes('standard') || n.includes('box') || n.includes('draw')) return 'pack-standard';
-  return 'pack-default';
+function getCoverClass(type) {
+  const t = (type || '').toLowerCase();
+  if (t.includes('epic')) return 'cover-epic';
+  if (t.includes('big time')) return 'cover-bigtime';
+  if (t.includes('show time')) return 'cover-showtime';
+  if (t.includes('potw') || t.includes('highlight') || t.includes('featured')) return 'cover-potw';
+  if (t.includes('legendary')) return 'cover-legendary';
+  if (t.includes('standard') || t.includes('box') || t.includes('draw')) return 'cover-standard';
+  return 'cover-default';
 }
 
-// حساب نسبة الحظ لباك معين
 function calcPackLuck(packName) {
   const opens = data.opens.filter(o => o.packType === packName);
   if (opens.length === 0) return { percent: 0, count: 0, best: 0 };
@@ -399,7 +458,6 @@ function calcPackLuck(packName) {
   return { percent, count: opens.length, best };
 }
 
-// حساب النسبة العامة
 function calcOverallLuck() {
   if (data.opens.length === 0) return { percent: 0, advice: "اضغط على أي باك تحت لتسجل سحبتك" };
   const avg = data.opens.reduce((s, o) => s + (o.rating - 100), 0) / data.opens.length;
@@ -411,44 +469,49 @@ function calcOverallLuck() {
   return { percent, advice };
 }
 
-// عرض البطاقات
 function renderPacksGrid() {
   const grid = document.getElementById('packsGrid');
   if (packs.length === 0) {
-    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:#666;padding:20px;">ماكو باكات، ضيف من "إدارة الباكات"</div>';
+    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:#666;padding:20px;">ماكو باكات</div>';
     return;
   }
   grid.innerHTML = packs.map(p => {
-    const cls = getPackClass(p);
-    const luck = calcPackLuck(p);
+    const coverCls = getCoverClass(p.type);
+    const luck = calcPackLuck(p.name);
     let luckCls = 'bad';
     if (luck.percent >= 60) luckCls = 'good';
     else if (luck.percent >= 30) luckCls = 'mid';
-    const shortName = p.length > 18 ? p.substring(0, 16) + '..' : p;
+
     return `
-      <div class="pack-card ${cls}" data-pack="${p}">
-        <div class="pack-shine"></div>
-        <div class="pack-badge">${luck.count} سحبة</div>
-        <div class="pack-name">${shortName}</div>
-        <div class="pack-luck">
-          <div class="pack-luck-num ${luckCls}">${luck.percent}%</div>
-          <div class="pack-luck-lbl">نسبة الحظ</div>
-        </div>
-        <div class="pack-meta">
-          <span>أعلى: ${luck.best || '-'}</span>
+      <div class="pack-card" data-pack="${p.name}">
+        <div class="pack-cover ${coverCls}">
+          <div class="pack-rays"></div>
+          <div class="pack-corner">${luck.count} سحبة</div>
+          <div class="pack-type-label">${p.type}</div>
+          <div class="pack-icon">${p.icon}</div>
+          <div class="pack-info">
+            <div class="name">${p.name}</div>
+            <div class="luck-row">
+              <div>
+                <div class="luck-num ${luckCls}">${luck.percent}%</div>
+                <div class="luck-lbl">نسبة الحظ</div>
+              </div>
+              <div style="text-align:left;">
+                <div class="best-rating">أعلى: ${luck.best || '-'}</div>
+                <div class="opens-count">${luck.count} سحبة</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     `;
   }).join('');
 
   grid.querySelectorAll('.pack-card').forEach(card => {
-    card.addEventListener('click', () => {
-      openModal(card.dataset.pack);
-    });
+    card.addEventListener('click', () => openModal(card.dataset.pack));
   });
 }
 
-// قائمة الإدارة
 function renderPacksList() {
   const list = document.getElementById('packsList');
   if (packs.length === 0) {
@@ -456,12 +519,12 @@ function renderPacksList() {
     return;
   }
   list.innerHTML = packs.map((p, i) => `
-    <li><span>${p}</span><button class="delete-pack-btn" data-idx="${i}">حذف</button></li>
+    <li><span>${p.icon} ${p.name} <small style="color:#888;">(${p.type})</small></span><button class="delete-pack-btn" data-idx="${i}">حذف</button></li>
   `).join('');
   list.querySelectorAll('.delete-pack-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const idx = parseInt(btn.dataset.idx);
-      if (confirm(`تحذف "${packs[idx]}"؟`)) {
+      if (confirm(`تحذف "${packs[idx].name}"؟`)) {
         packs.splice(idx, 1);
         savePacks(); renderPacksGrid(); renderPacksList();
       }
@@ -469,7 +532,6 @@ function renderPacksList() {
   });
 }
 
-// مودال
 let selectedRating = null;
 let currentPack = null;
 
@@ -481,11 +543,9 @@ function openModal(packName) {
   document.getElementById('confirmBtn').disabled = true;
   document.getElementById('modal').classList.add('show');
 }
-
 function closeModal() {
   document.getElementById('modal').classList.remove('show');
-  currentPack = null;
-  selectedRating = null;
+  currentPack = null; selectedRating = null;
 }
 
 document.querySelectorAll('.rating-btn').forEach(btn => {
@@ -508,7 +568,6 @@ document.getElementById('confirmBtn').addEventListener('click', () => {
   alert('✅ تم تسجيل السحبة!');
 });
 
-// الرسم العام
 function render() {
   const opens = data.opens;
   document.getElementById('totalOpens').textContent = opens.length;
@@ -520,7 +579,6 @@ function render() {
   document.getElementById('currentLuck').textContent = overall.percent + '%';
   document.getElementById('luckAdvice').textContent = overall.advice;
 
-  // أفضل وقت
   const hourCount = {};
   opens.forEach(o => {
     const h = new Date(o.time).getHours();
@@ -532,7 +590,6 @@ function render() {
   }
   document.getElementById('bestTime').textContent = opens.length ? bestHour + ':00' : '--';
 
-  // السجل
   const hist = document.getElementById('history');
   if (opens.length === 0) {
     hist.innerHTML = '<li style="color:#666;">ماكو سحبات مسجلة بعد.</li>';
@@ -548,7 +605,6 @@ function render() {
   renderPacksGrid();
 }
 
-// إدارة
 document.getElementById('toggleManage').addEventListener('click', () => {
   const sec = document.getElementById('manageSection');
   sec.style.display = sec.style.display === 'none' ? 'block' : 'none';
@@ -557,8 +613,8 @@ document.getElementById('toggleManage').addEventListener('click', () => {
 document.getElementById('addPackBtn').addEventListener('click', () => {
   const name = document.getElementById('newPackName').value.trim();
   if (!name) return alert('اكتب اسم الباك!');
-  if (packs.includes(name)) return alert('هذا الباك موجود!');
-  packs.push(name);
+  if (packs.some(p => p.name === name)) return alert('هذا الباك موجود!');
+  packs.push({ name, type: name, icon: "🎁" });
   savePacks();
   document.getElementById('newPackName').value = '';
   renderPacksGrid(); renderPacksList();
@@ -572,7 +628,6 @@ document.getElementById('clearBtn').addEventListener('click', () => {
   }
 });
 
-// PWA
 let deferredPrompt;
 window.addEventListener('beforeinstallprompt', (e) => {
   e.preventDefault();
@@ -591,7 +646,6 @@ if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('sw.js').catch(()=>{});
 }
 
-// تشغيل
 renderPacksList();
 render();
 </script>
